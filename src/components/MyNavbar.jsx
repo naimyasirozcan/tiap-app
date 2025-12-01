@@ -16,17 +16,18 @@ function MyNavbar() {
       }
     }
       className="bottom-shadow ps-3 d-flex flex-row align-items-center justify-content-between">
-      <img src={LightLogo} alt="" />
+      <img style={{height: "24px"}} src={LightLogo} alt="" />
 
       <ul style={
         {
           listStyle: "none",
-          marginBottom: 0
+          marginBottom: 0,
+          color: "#fff"
         }
       }
-      className="d-flex align-items-center gap-3 pe-2">
-        <li><Link to={"/about"}>About Us</Link></li>
-        <li><Link to={"/about"}>About Us</Link></li>
+      className="d-flex align-items-center gap-3 pe-2 poppins-light">
+         <li><Link to={"/about"}>About Us</Link></li>
+        <li><Link to={"/"}>Login</Link></li>
       </ul>
 
     </div>

@@ -12,8 +12,8 @@ import ExceptionDetails from "./pages/ExceptionDetails"
 import ExceptionLogs from "./pages/ExceptionLogs"
 import RootCauses from "./pages/RootCauses"
 import RootCauseDetails from "./pages/RootCauseDetails"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
+import Login from "./pages/auth/Login"
+import Signup from "./pages/auth/Signup"
 import NotFound from "./pages/errors/NotFound"
 
 function App() {

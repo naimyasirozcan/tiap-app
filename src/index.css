@@ -135,3 +135,29 @@
 .bottom-shadow {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.482)
 }
+
+/* *** Links *** */
+
+a {
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+  opacity: 0.8;
+}
+
+.active-link {
+  color: blueviolet;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
