@@ -1,8 +1,16 @@
 import { NavLink, Link } from "react-router-dom"
 import addBtn from "../assets/add-btn.png"
 import settingsBtn from "../assets/settings icon.png"
+import { useState } from "react"
 
 function Sidebar() {
+
+const [showSettings, setShowSettings] = useState(false)
+
+const handleShowSettings = () => {
+    setShowSettings(!showSettings)
+}
+
     return (
         <div
             className="sidebar-shadow pb-10 flex flex-col justify-between text-white fixed top-[20px] left-0 h-full w-[120px] bg-[#403F3F] pt-[40px] text-[24px]">
@@ -24,8 +32,8 @@ function Sidebar() {
             </ul>
 
             <div className="flex justify-between align-center px-3">
-                <Link><img src={settingsBtn} alt="" /></Link>
-                <Link><img src={addBtn} alt="" /></Link>
+                <button onClick={handleShowSettings}><img src={settingsBtn} alt="" /></button>
+                <Link to={"/logs/create"}><img src={addBtn} alt="" /></Link>
             </div>
 
         </div>

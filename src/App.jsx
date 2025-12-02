@@ -33,7 +33,7 @@ function App() {
 
       <MyNavbar />
 
-       <div className="p-3 z-12 fixed top-[60px] right-[10px] ">
+       <div className="p-3 z-12 fixed top-[60px] right-[10px]">
 
         {toasts && toasts.map((eachToast, index) => {
           return <MyToast key={index} type={eachToast.type} message={eachToast.message}/>
@@ -44,7 +44,7 @@ function App() {
 
       {isLoggedIn && <Sidebar />}
 
-      <div id="main-content" className="h-auto pb-20">
+      <div id="main-content" className={isLoggedIn ? "h-auto w-full pl-[120px] py-[20px]" : "h-auto w-full"}>
 
         <Routes>
           <Route path={"/login"} element={<Login />}/>
@@ -53,6 +53,7 @@ function App() {
 
           <Route path={"/logs"} element={<RouteProtection><ExceptionLogs /></RouteProtection>} />
           <Route path={"/logs/:id"} element={<RouteProtection><ExceptionDetails /></RouteProtection>} />
+          <Route path={"/logs/create"} element={<RouteProtection><CreateExceptionLog /></RouteProtection>} />
 
           <Route path={"/root-causes"} element={<RouteProtection><RootCauses /></RouteProtection>} />
           <Route path={"/root-causes/:id"} element={<RouteProtection><RootCauseDetails /></RouteProtection>} />

@@ -1,11 +1,13 @@
 import { useContext, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import logoIcon from "../../assets/tiap-icon-dark.png"
 import { AuthContext } from "../../contexts/auth.context"
 import axios from "axios"
+import { ToastContext } from "@/contexts/toast.context"
 
 function Login() {
 
+  const { toast, setToasts, createToast } = useContext(ToastContext)
   const { isLoggedIn, setIsLoggedIn, loggedUserId, authenticateUser } = useContext(AuthContext)
   const [errorMessage, setErrorMessage] = useState("")
   const [isButtonDisabled, setIsButtonDisabled] = useState()
@@ -15,10 +17,6 @@ function Login() {
     password: ""
   })
 
-  // if(isLoggedIn){
-  //   navigate('/logs')
-  //   return
-  // }
 
   const handleChange = (e) => {
     e.target.name === "email" ? setBody({
@@ -36,22 +34,26 @@ function Login() {
 
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/auth/login`, body)
 
-      console.log("Employee logged in to TIAP succesfully.")
-
+      
       localStorage.setItem("authToken", response.data.authToken)
-
+      
       await authenticateUser()
-
+      
       navigate("/logs")
 
+      console.log(`Welcome ${body.email}!`)
+
+      createToast("success", `Welcome ${body.email}!`)
     } catch (error) {
 
       if (error.response && error.response.status === 400) {
         console.log(error.response.data.errorMessage)
+        createToast("warning", error.response.data.errorMessage)
       }
       else {
         if (error.response && error.response.status === 500) {
-          navigate("/505")
+          createToast("warning", error.response.data.errorMessage)
+          navigate("/500")
         }
         else {
           console.log(error, "Unknown error.")
@@ -59,6 +61,14 @@ function Login() {
       }
     }
 
+  }
+
+  if(isLoggedIn){
+    return (
+        <>
+        {<Navigate to="/logs" />}
+        </>
+    )
   }
 
   return (

@@ -1,10 +1,13 @@
 import axios from "axios"
 import { useContext, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import showPasswordIcon from "../../assets/eye-icon.png"
 import { ToastContext } from "@/contexts/toast.context"
+import { AuthContext } from "@/contexts/auth.context"
 
 function Signup() {
+  
+  const { isLoggedIn } = useContext(AuthContext)
   const { toast, setToasts, createToast } = useContext(ToastContext)
   const navigate = useNavigate()
   const [isPasswordHidden, setIsPasswordHidden] = useState(true)
@@ -48,7 +51,7 @@ function Signup() {
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/auth/signup`, body)
 
       console.log("Employee logged in to TIAP succesfully.")
-
+      createToast("success", response.data.message)
       navigate("/login")
 
     } catch (error) {
@@ -69,6 +72,15 @@ function Signup() {
     }
 
   }
+
+  if(isLoggedIn){
+    return (
+        <>
+        {<Navigate to="/logs" />}
+        </>
+    )
+  }
+
   return (
     <div
       className="w-full font-poppins text-black poppins-regular min-h-[calc(100vh-120px)] pt-10">
