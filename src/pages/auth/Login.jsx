@@ -4,17 +4,6 @@ import logoIcon from "../../assets/tiap-icon-dark.png"
 
 function Login() {
 
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div 
       className="w-full font-poppins text-black poppins-regular h-screen pt-10">
