@@ -1,7 +1,10 @@
+import { AuthContext } from "@/contexts/auth.context"
+import { useContext } from "react"
 
 function ExceptionLogs() {
-  return (
-    <div>
+
+    return (
+    <div className="">
       wellcome
     </div>
   )

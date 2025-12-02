@@ -15,6 +15,11 @@ function Login() {
     password: ""
   })
 
+  // if(isLoggedIn){
+  //   navigate('/logs')
+  //   return
+  // }
+
   const handleChange = (e) => {
     e.target.name === "email" ? setBody({
       ...body, email: e.target.value
@@ -37,9 +42,7 @@ function Login() {
 
       await authenticateUser()
 
-      setTimeout(() => {
-        navigate("/logs")
-      }, 100)
+      navigate("/logs")
 
     } catch (error) {
 

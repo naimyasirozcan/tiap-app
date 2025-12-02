@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 const AuthContext = createContext()
 
 function AuthWrapper({ children }) {
+
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [loggedUserId, setLoggedUserId] = useState(null)
     const [isValidatingUser, setIsValidatingUser] = useState(true)
@@ -22,6 +23,7 @@ function AuthWrapper({ children }) {
                 setIsLoggedIn(false)
                 setLoggedUserId(null)
                 setIsValidatingUser(false)
+                navigate("/login")
                 return
             }
 
@@ -34,16 +36,14 @@ function AuthWrapper({ children }) {
             setIsLoggedIn(true)
             setLoggedUserId(response.data._id)
             setIsValidatingUser(false)
-
+            
         } catch (error) {
 
             setIsLoggedIn(false)
             setLoggedUserId(null)
             setIsValidatingUser(false)
             console.log(error)
-
-            navigate('/')
-
+            navigate("/login")
         }
     }
 
