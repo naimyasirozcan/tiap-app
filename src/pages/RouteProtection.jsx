@@ -1,11 +1,10 @@
-import { AuthContext } from '@/contexts/auth.context'
+import { AuthContext } from '../contexts/auth.context'
 import React, { useContext } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 function RouteProtection({ children }) {
 
     const { isLoggedIn, isValidatingUser } = useContext(AuthContext)
-    const navigate = useNavigate()
 
     if(isValidatingUser){
         return

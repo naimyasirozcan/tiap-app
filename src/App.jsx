@@ -22,6 +22,8 @@ import Orders from "./pages/Orders"
 import RouteProtection from "./pages/RouteProtection"
 import MyToast from "./components/MyToast"
 import { ToastContext } from "./contexts/toast.context"
+import CreateRootCause from "./pages/CreateRootCause"
+import Dashboard from "./pages/Dashboard"
 
 function App() {
 
@@ -52,14 +54,17 @@ function App() {
           <Route path={"/profile"} element={<RouteProtection><Profile /></RouteProtection>} />
 
           <Route path={"/logs"} element={<RouteProtection><ExceptionLogs /></RouteProtection>} />
-          <Route path={"/logs/:id"} element={<RouteProtection><ExceptionDetails /></RouteProtection>} />
+          <Route path={"/logs/:_id"} element={<RouteProtection><ExceptionDetails /></RouteProtection>} />
           <Route path={"/logs/create"} element={<RouteProtection><CreateExceptionLog /></RouteProtection>} />
 
+          <Route path={"/dashboard"} element={<RouteProtection><Dashboard /></RouteProtection>} />
+
           <Route path={"/root-causes"} element={<RouteProtection><RootCauses /></RouteProtection>} />
-          <Route path={"/root-causes/:id"} element={<RouteProtection><RootCauseDetails /></RouteProtection>} />
+          <Route path={"/root-causes/:_id"} element={<RouteProtection><RootCauseDetails /></RouteProtection>} />
+          <Route path={"/root-causes/create"} element={<RouteProtection><CreateRootCause /></RouteProtection>} />
 
           <Route path={"/orders"} element={<RouteProtection><Orders /></RouteProtection>} />
-          <Route path={"/order/:id"} element={<RouteProtection><OrderDetails /></RouteProtection>} />
+          <Route path={"/order/:_id"} element={<RouteProtection><OrderDetails /></RouteProtection>} />
 
           <Route path={"/500"} element={<InternalServerError />} />
           <Route path={"/404"} element={<NotFound />} />

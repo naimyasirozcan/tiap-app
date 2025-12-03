@@ -8,8 +8,10 @@ const AuthContext = createContext()
 function AuthWrapper({ children }) {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [loggedUserId, setLoggedUserId] = useState(null)
+    const [loggedUserInfo, setLoggedUserInfo] = useState(null)
     const [isValidatingUser, setIsValidatingUser] = useState(true)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const [isSuperAdmin, setIsSuperAdmin] = useState(false)
     const navigate = useNavigate()
 
     async function authenticateUser() {
@@ -21,8 +23,10 @@ function AuthWrapper({ children }) {
 
             if (!authToken) {
                 setIsLoggedIn(false)
-                setLoggedUserId(null)
+                setLoggedUserInfo(null)
                 setIsValidatingUser(false)
+                setIsAdmin(false)
+                setIsSuperAdmin(false)
                 navigate("/login")
                 return
             }
@@ -33,14 +37,22 @@ function AuthWrapper({ children }) {
                 }
             })
 
+            localStorage.setItem("loggedUserInfo", response.data)
+
+            if(response.data.role === "admin" || response.data.role === "superAdmin"){
+                setIsAdmin(true)
+            } else if (response.data.role === "superAdmin"){
+                setIsSuperAdmin(true)
+            }
+
             setIsLoggedIn(true)
-            setLoggedUserId(response.data._id)
+            setLoggedUserInfo(response.data)
             setIsValidatingUser(false)
             
         } catch (error) {
 
             setIsLoggedIn(false)
-            setLoggedUserId(null)
+            setLoggedUserInfo(null)
             setIsValidatingUser(false)
             console.log(error)
             navigate("/login")
@@ -53,9 +65,11 @@ function AuthWrapper({ children }) {
 
     const passedContext = {
         isLoggedIn,
-        loggedUserId,
+        loggedUserInfo,
         setIsLoggedIn,
-        authenticateUser
+        authenticateUser,
+        isAdmin,
+        isSuperAdmin
     }
 
     if (isValidatingUser) {

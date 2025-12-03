@@ -9,7 +9,6 @@ function Login() {
 
   const { toast, setToasts, createToast } = useContext(ToastContext)
   const { isLoggedIn, setIsLoggedIn, loggedUserId, authenticateUser } = useContext(AuthContext)
-  const [errorMessage, setErrorMessage] = useState("")
   const [isButtonDisabled, setIsButtonDisabled] = useState()
   const navigate = useNavigate()
   const [body, setBody] = useState({

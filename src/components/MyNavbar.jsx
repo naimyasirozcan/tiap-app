@@ -10,11 +10,13 @@ function MyNavbar() {
   const location = useLocation()
 
   const handleLogout = async () => {
+
     localStorage.removeItem("authToken")
-    navigate("/login")
+    localStorage.removeItem("loggerUserInfo")
     await authenticateUser()
+    navigate("/login")
     console.log(`Employee logged out from TIAP succesfully.`)
-    return
+
   }
 
   return (

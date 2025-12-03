@@ -4,35 +4,49 @@ import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import Loading from "./Loading"
 import ExceptionListRow from "@/components/ExceptionListRow"
+import service from "./services/config.services"
+import ExceptionListHeader from "@/components/ExceptionListHeader"
+import ExceptionListFiltersBar from "@/components/ExceptionListFiltersBar"
+
 
 function ExceptionLogs() {
 
-  const [ exceptions, setExceptions ] = useState(null)
-  const [ searchParams, setSearchParams] = useSearchParams()
+  const [exceptions, setExceptions] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
 
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/api/exceptions`, {
-      headers: {
-      Authorization: `Bearer ${localStorage.getItem("authToken")}`
+    service.get("/exceptions", {
+      params: searchParams
     }
-    })
-    .then((res) => setExceptions(res.data))
-    .catch((error) => console.log(error))
+    )
+      .then((res) => setExceptions(res.data))
+      .catch((error) => console.log(error))
 
-  },[searchParams])
+      console.log(searchParams)
+
+  }, [searchParams])
 
 
-  if(!exceptions){
-    return <Loading/>
+  if (!exceptions) {
+    return <Loading />
   }
 
-    return (
-    <div className="w-full h-auto">
-      {exceptions.map((eachException) => {
-        return <ExceptionListRow exception={eachException}/>
-      })}
-    </div>
+  return (
+    <>
+
+      <div className="w-full h-auto p-5">
+
+        <div className="overflow-x-auto">
+          <ExceptionListFiltersBar searchParams={searchParams} setSearchParams={setSearchParams} />
+        <ExceptionListHeader />
+
+        {exceptions.map((eachException, index) => {
+          return <ExceptionListRow key={index} exception={eachException} />
+        })}
+        </div>
+      </div>
+    </>
   )
 }
 

@@ -5,11 +5,11 @@ import { useState } from "react"
 
 function Sidebar() {
 
-const [showSettings, setShowSettings] = useState(false)
+    const [showSettings, setShowSettings] = useState(false)
 
-const handleShowSettings = () => {
-    setShowSettings(!showSettings)
-}
+    const handleShowSettings = () => {
+        setShowSettings(!showSettings)
+    }
 
     return (
         <div
@@ -31,10 +31,28 @@ const handleShowSettings = () => {
                 </li>
             </ul>
 
-            <div className="flex justify-between align-center px-3">
-                <button onClick={handleShowSettings}><img src={settingsBtn} alt="" /></button>
-                <Link to={"/logs/create"}><img src={addBtn} alt="" /></Link>
+            <div className="flex flex-col items-center">
+
+                {showSettings && <div className="flex flex-col bg-zinc-800 h-20 w-[80%] mb-3 p-2 rounded-md">
+
+                    <Link to={"/root-causes"}  onClick={handleShowSettings} className="text-[12px]">Rootcauses</Link>
+
+                </div>}
+
+                <div className="flex w-full justify-between align-center px-3">
+
+                    <button onClick={handleShowSettings}>
+                        <img src={settingsBtn} alt="" />
+                    </button>
+
+                    <Link to={"/logs/create"}>
+                        <img src={addBtn} alt="create a new exception" />
+                    </Link>
+
+                </div>
+
             </div>
+
 
         </div>
     )
