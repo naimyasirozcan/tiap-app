@@ -171,10 +171,10 @@ function ExceptionDetails() {
           <div className="flex gap-2">
             <button onClick={() => {
               setShowDeleteConfirm(true)
-            }} className=" bg-red-900 px-3 py-1 rounded-lg">Delete</button> 
+            }} className=" bg-red-400 px-3 py-1 rounded-lg">Delete</button> 
           <button onClick={() => {
             navigate(`/logs/${exception._id}/edit`)
-          }} className=" bg-zinc-500 px-3 py-1 rounded-lg">Edit</button>
+          }} className=" bg-zinc-400 px-3 py-1 rounded-lg">Edit</button>
           </div>
         </div>
 

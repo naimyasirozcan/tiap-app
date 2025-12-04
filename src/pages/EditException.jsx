@@ -509,7 +509,7 @@ function EditException() {
 
             if (error.response.data.errorMessage) {
                 console.log(error.response.data.errorMessage)
-                createToast("error", error.response.data.errorMessage)
+                createToast("danger", error.response.data.errorMessage)
             }
 
         } finally {

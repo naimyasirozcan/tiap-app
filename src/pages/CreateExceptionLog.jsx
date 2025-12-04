@@ -57,7 +57,7 @@ function CreateExceptionLog() {
   // *************************************************************************************************
 
   useEffect(() => {
-    if(task){
+    if (task) {
       setMaxQty(Number(task.processedQty))
       setIsBtnDisabled(false)
     } else {
@@ -358,21 +358,23 @@ function CreateExceptionLog() {
   // *************************************************************************************************
 
   const handleCancel = () => {
-   const resetForm = { receivedAs: "",
-    orderNo: "",
-    skuNo: "",
-    skuQty: "",
-    exceptionType: "",
-    occurOn: "",
-    rootCause: "",
-    department: "",
-    foundBy: "",
-    status: "",
-    replacedFrom: "",
-    fakeLocation: "",
-    handledBy: "",
-    errorBy: "",
-    notes: ""}
+    const resetForm = {
+      receivedAs: "",
+      orderNo: "",
+      skuNo: "",
+      skuQty: "",
+      exceptionType: "",
+      occurOn: "",
+      rootCause: "",
+      department: "",
+      foundBy: "",
+      status: "",
+      replacedFrom: "",
+      fakeLocation: "",
+      handledBy: "",
+      errorBy: "",
+      notes: ""
+    }
 
     setFormInput(resetForm)
 
@@ -480,9 +482,9 @@ function CreateExceptionLog() {
 
 
   return (
-    <div className="px-10 pt-3">
+    <div className="flex items-start justify-center h-[100vh] px-10 pt-10 pb-40">
 
-      <div className="rounded-[36px] min-w-[350px] bg-[#F6F6F6] bottom-shadow p-8">
+      <div className="rounded-[36px] w-full bg-[#F6F6F6] bottom-shadow p-8">
 
         <div>
 
@@ -490,9 +492,9 @@ function CreateExceptionLog() {
 
             <h2 className="text-xl mb-4">New Exception</h2>
 
-            <div className="grid grid-cols-12 gap-0">
+            <div className="grid grid-cols-12 gap-">
 
-              <div className="xs:col-span-12 lg:col-span-8 grid grid-cols-12 gap-2">
+              <div className="xs:col-span-12 lg:col-span-8 grid grid-cols-12 gap-4">
 
                 <div className="xs:col-span-12 lg:col-span-6">
 
@@ -562,7 +564,7 @@ function CreateExceptionLog() {
 
                       <h6 className="mb-2">Zone</h6>
 
-                      <input type="text" disabled={true} value={taskCollection ? taskCollection.zone :""} name="zone" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
+                      <input type="text" disabled={true} value={taskCollection ? taskCollection.zone : ""} name="zone" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
 
                     </div>
 
@@ -602,7 +604,7 @@ function CreateExceptionLog() {
 
                       <h6 className="mb-2">SKU Price - €</h6>
 
-                      <input type="text" disabled={true} value={sku ? sku.price : 0 } name="skuPrice" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
+                      <input type="text" disabled={true} value={sku ? sku.price : 0} name="skuPrice" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
 
                     </div>
 
@@ -693,7 +695,7 @@ function CreateExceptionLog() {
 
               </div>
 
-              <div className="xs:col-span-12 lg:col-span-4 p-8">
+              <div className="xs:col-span-12 lg:col-span-4 p-3">
 
 
                 {imgFile && <div className="w-full h-auto flex items-center justify-center rounded-lg">
@@ -701,6 +703,7 @@ function CreateExceptionLog() {
                 </div>}
                 {task &&
                   <>
+                    <h6 className="mb-2">Image</h6>
 
                     <div className="mt-5">
                       <input required type="file" accept="image/*" placeholder="Choose an image" onChange={handleImageChange} className="flex cursor-pointer items-center w-full h-9 mb-3 text-[11px] p-2 bg-[#E0E0E0] rounded-lg px-3" />
@@ -731,17 +734,17 @@ function CreateExceptionLog() {
       {
         showCancelConfirm &&
         <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="p-6 rounded-xl shadow-lg bg-white">
-          <p className="w-full mb-4">Are you sure to cancel?</p>
-          <div className="flex items-center justify-between">
+          <div class="p-6 rounded-xl shadow-lg bg-white">
+            <p className="w-full mb-4">Are you sure to cancel?</p>
+            <div className="flex items-center justify-between">
               <button onClick={() => {
                 setShowCancelConfirm(false)
               }} className=" bg-zinc-500 px-3 py-1 rounded-lg">Go Back</button>
-            <button onClick={handleCancel} className="bg-red-400 px-3 py-1 rounded-lg">Yes</button>
+              <button onClick={handleCancel} className="bg-red-400 px-3 py-1 rounded-lg">Yes</button>
+            </div>
           </div>
+
         </div>
-        
-      </div>
       }
 
     </div>

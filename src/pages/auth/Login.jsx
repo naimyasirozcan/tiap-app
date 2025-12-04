@@ -44,20 +44,8 @@ function Login() {
 
       createToast("success", `Welcome ${body.email}!`)
     } catch (error) {
-
-      if (error.response && error.response.status === 400) {
         console.log(error.response.data.errorMessage)
-        createToast("warning", error.response.data.errorMessage)
-      }
-      else {
-        if (error.response && error.response.status === 500) {
-          createToast("warning", error.response.data.errorMessage)
-          navigate("/500")
-        }
-        else {
-          console.log(error, "Unknown error.")
-        }
-      }
+        createToast("danger", error.response.data.errorMessage)
     }
 
   }

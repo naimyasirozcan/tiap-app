@@ -1,7 +1,8 @@
 import { NavLink, Link } from "react-router-dom"
-import addBtn from "../assets/add-btn.png"
-import settingsBtn from "../assets/settings icon.png"
+import addBtnIcon from "../assets/add-btn.png"
+import settingsBtnIcon from "../assets/settings icon.png"
 import { useState, useEffect, useRef } from "react"
+import listIconRootCauseList from "../assets/rootcauses-list-icon.png"
 
 function Sidebar() {
   const [showSettings, setShowSettings] = useState(false)
@@ -51,19 +52,19 @@ function Sidebar() {
             to={"/dashboard"}>Dashboard</NavLink>
         </li>
       </ul>
-      <div className="flex flex-col items-center" ref={settingsRef}>
+      <div className="flex flex-col  items-center" ref={settingsRef}>
         {showSettings && (
-          <div className="fixed bottom-14 left-8 bg-zinc-800 h-40 w-40 mb-3 p-3 rounded-lg flex flex-col">
-            <Link to={"/root-causes"} onClick={handleShowSettings} className="text-[12px]"> Root Causes</Link>
-            <Link to={"/root-causes/create"} onClick={handleShowSettings} className="text-[12px]">  New Root Cause </Link>
+          <div className="fixed bottom-14 left-8 bg-zinc-800 h-40 w-40 mb-3 p-3 rounded-lg flex flex-col gap-1">
+            <Link to={"/root-causes"} onClick={handleShowSettings} className="text-[12px] flex items-center gap-1"> <img className="inline h-4" src={listIconRootCauseList} alt="" /> Root Causes</Link>
+            <Link to={"/root-causes/create"} onClick={handleShowSettings} className="text-[12px] flex items-center gap-1"> <img className="inline h-3 pl-1" src={addBtnIcon} alt="" /> New Root Cause </Link>
           </div>
         )}
         <div className="flex w-full justify-between align-center px-3">
           <button onClick={handleShowSettings}>
-            <img src={settingsBtn} alt="" />
+            <img src={settingsBtnIcon} alt="" />
           </button>
           <Link to={"/logs/create"}>
-            <img src={addBtn} alt="create a new exception" />
+            <img src={addBtnIcon} alt="create a new exception" />
           </Link>
         </div>
       </div>
