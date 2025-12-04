@@ -35,9 +35,9 @@ function AuthWrapper({ children }) {
                 headers: {
                     authorization: `Bearer ${authToken}`
                 }
-            })
+            }) 
 
-            localStorage.setItem("loggedUserInfo", response.data)
+            localStorage.setItem("loggedUserInfo", JSON.stringify(response.data))
 
             if(response.data.role === "admin" || response.data.role === "superAdmin"){
                 setIsAdmin(true)
