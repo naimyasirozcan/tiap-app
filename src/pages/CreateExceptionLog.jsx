@@ -7,7 +7,7 @@ import service from "./services/config.services"
 function CreateExceptionLog() {
 
   const { toasts, setToast, createToast } = useContext(ToastContext)
-
+  const navigate = useNavigate()
   const [order, setOrder] = useState(null)
   const [sku, setSku] = useState(null)
   const [taskCollection, setTaskCollection] = useState(null)
@@ -411,9 +411,9 @@ function CreateExceptionLog() {
         exceptionLocation: formInput.fakeLocation,
         skuPrice: sku ? sku.price : null,
         totalCost: sku ? formInput.skuQty * sku.price : 0,
-        errorBy: taskCollection ? taskCollection.employee._id : "",
-        foundBy: foundBy ? foundBy._id : "",
-        handledBy: handledBy ? handledBy._id : "",
+        errorBy: taskCollection ? taskCollection.employee.email : "",
+        foundBy: foundBy ? foundBy.email : "",
+        handledBy: handledBy ? handledBy.email : "",
         status: formInput.status,
         notes: formInput.notes,
         image: imgURL ? imgURL : ""
@@ -425,11 +425,13 @@ function CreateExceptionLog() {
       const response = await service.post('/exceptions', newException)
 
       createToast("success", "Exception created successfully.")
+      navigate("/logs")
 
     } catch (error) {
 
       console.log(error)
       createToast("error", "Error occurred.")
+
     } finally {
       setIsBtnDisabled(false)
       setIsUploading(false)
