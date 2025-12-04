@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom"
 import Loading from "./Loading"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import service from "./services/config.services"
 import ExceptionListRow from "@/components/ExceptionListRow"
-
+import { ToastContext } from "@/contexts/toast.context"
 
 function RootCauseDetails() {
-
+  const { toasts, setToasts, createToast } = useContext(ToastContext)
   const { _id } = useParams()
   const [rootCause, setRootCause] = useState(null)
   const [exceptions, setExceptions] = useState(null)
@@ -79,12 +79,15 @@ function RootCauseDetails() {
 
           <div className="flex flex-col gap-3">
             <button onClick={() => {
-              navigate(`/`)
+              navigate(`/root-causes/${_id}/edit`)
             }} className="p-2 bg-zinc-500 rounded-lg">Edit</button>
 
-            <button onClick={() => {
-              setShowDeleteConfirm(true)
-            }} className="p-2 bg-red-400 rounded-lg">Delete</button>
+            {
+              (!exceptions || exceptions.length === 0) &&
+              <button onClick={() => {
+                setShowDeleteConfirm(true)
+              }} className="p-2 bg-red-400 rounded-lg">Delete</button>
+            }
 
           </div>
 
@@ -99,14 +102,14 @@ function RootCauseDetails() {
 
           <h1>Exceptions related with the root cause:</h1>
 
-           { exceptions.length > 0 ?
-           
-           exceptions.map((eachException, index) => {
-          return <ExceptionListRow key={index} exception={eachException} />
-        })
-      :
-      <p>There is no exception with this root cause!</p>
-      }
+          {exceptions.length > 0 ?
+
+            exceptions.map((eachException, index) => {
+              return <ExceptionListRow key={index} exception={eachException} />
+            })
+            :
+            <p>There is no exception with this root cause!</p>
+          }
 
         </div>
 

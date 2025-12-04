@@ -36,6 +36,7 @@ function Sidebar() {
                 {showSettings && <div className="flex flex-col bg-zinc-800 h-20 w-[80%] mb-3 p-2 rounded-md">
 
                     <Link to={"/root-causes"}  onClick={handleShowSettings} className="text-[12px]">Rootcauses</Link>
+                    <Link to={"/root-causes/create"}  onClick={handleShowSettings} className="text-[12px]">New R.C.</Link>
 
                 </div>}
 

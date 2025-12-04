@@ -1,11 +1,112 @@
-import React from 'react'
+import { ToastContext } from "@/contexts/toast.context"
+import { useContext, useEffect, useState } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import service from "./services/config.services"
 
 function EditRootCause() {
-  return (
-    <div>
-      
-    </div>
-  )
+
+    const { _id } = useParams()
+
+    const navigate = useNavigate()
+    const { toasts, setToasts, createToast } = useContext(ToastContext)
+    const [newRootCause, setUpdatedRootCause] = useState({
+        task: "",
+        title: "",
+        type: ""
+    })
+
+    useEffect(() => {
+        service.get(`/root-causes/${_id}`)
+            .then((res) => {
+                setUpdatedRootCause({
+                    task: res.data.task || "",
+                    title: res.data.title || "",
+                    type: res.data.type || ""
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [_id])
+
+    const handleEditRootCause = async (e) => {
+        e.preventDefault()
+
+        try {
+            const response = await service.put(`/root-causes/${_id}`, newRootCause)
+            console.log(response)
+            createToast("success", response.data.message)
+            setUpdatedRootCause({
+                task: "",
+                title: "",
+                type: ""
+            })
+            navigate("/root-causes")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+
+        setUpdatedRootCause({
+            ...newRootCause,
+            [name]: value
+        })
+        console.log(name, ": ", value)
+    }
+
+
+    return (
+        <div
+            className="w-full font-poppins text-black poppins-regular min-h-[calc(100vh-120px)] pt-10">
+
+            <div className="grid grid-cols-12 gap-4 min-h-[calc(100vh-120px)]">
+
+                <div className="xs:col-span-12 flex flex-col justify-center items-center ">
+
+                    <div className="h-[500px] w-[350px] rounded-[36px] bg-[#F6F6F6] bottom-shadow p-8">
+
+                        <div>
+
+                            <form onSubmit={handleEditRootCause}>
+                                <h2 className="text-xl mb-4">New Root Cause</h2>
+
+                                <h6 className="mb-2">Title:</h6>
+                                <input type="text" name="title" value={newRootCause.title} placeholder="type title here..." onChange={handleChange} className="w-full h-20 mb-3 bg-[#E0E0E0] rounded-lg p-3" />
+
+                                <div className="flex flex-col gap-3">
+
+                                    <select className=" bg-zinc-400 w-full p-3 rounded-lg" name="type" value={newRootCause.type} onChange={handleChange}>
+                                        <option value="" className="text-gray-500">select type...</option>
+                                        <option value="damaged">Damaged</option>
+                                        <option value="missing">Missing</option>
+                                    </select>
+
+                                    <select className=" bg-zinc-400 w-full p-3 rounded-lg" name="task" value={newRootCause.task} onChange={handleChange}>
+                                        <option value="" className="text-gray-500">select task...</option>
+                                        <option value="picking">Picking</option>
+                                        <option value="packing">Packing</option>
+                                    </select>
+
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <button type="button" className="mt-3 bg-zinc-500 px-3 py-1 rounded-lg" onClick={() => { navigate(-1) }}>Cancel</button>
+                                    <button type="submit" className="mt-3 bg-zinc-500 px-3 py-1 rounded-lg" >Submit</button>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    )
 }
 
 export default EditRootCause

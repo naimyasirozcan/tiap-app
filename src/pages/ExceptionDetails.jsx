@@ -36,7 +36,7 @@ function ExceptionDetails() {
     }
     
   }
-  
+
   // ***********************************************************************************************
   
   if (!exception) {
@@ -66,7 +66,7 @@ function ExceptionDetails() {
 
         <div className="lg:col-span-3 md:col-span-6 xs:col-span-12 flex items-center gap-2 lg:mt-4 xs:mt-3">
           <h5>Order No:</h5>
-          <p><Link to={`/orders/${exception.order._id}`}>{exception.order.no}</Link></p>
+          <p>{exception.order.no}</p>
         </div>
 
         <div className="lg:col-span-3 md:col-span-6 xs:col-span-12 flex items-center gap-2 lg:mt-4 xs:mt-3">
@@ -86,7 +86,7 @@ function ExceptionDetails() {
 
         <div className="lg:col-span-3 md:col-span-6 xs:col-span-12 flex items-center gap-2 lg:mt-4 xs:mt-3">
           <h5>Location:</h5>
-          <p><Link to={`/locations/${exception.location._id}`}>{exception.location.name}</Link></p>
+          <p>{exception.location.name}</p>
         </div>
 
         <div className="lg:col-span-3 md:col-span-6 xs:col-span-12 flex items-center gap-2 lg:mt-4 xs:mt-3">
