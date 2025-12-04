@@ -22,7 +22,7 @@ function MyNavbar() {
   return (
 
     <div
-      className="bottom-shadow flex flex-row items-center justify-between pl-3 h-[20px] w-full bg-[#403f3f] fixed top-0 left-0 ">
+      className="bottom-shadow flex flex-row items-center justify-between pl-3 h-[20px] w-full bg-[#403f3f] fixed top-0 left-0">
       <img style={{ height: "20px" }} src={LightLogo} alt="" />
 
       <ul style={

@@ -10,11 +10,7 @@ function ExceptionListFiltersBar({ searchParams, setSearchParams }) {
             setSearchParams(searchParams)
             return
         }
-
-        // const newParams = new URLSearchParams(searchParams)
-        // newParams.set(name, value)
-        // setSearchParams(newParams)
-
+        
         searchParams.set(name, value)
         setSearchParams(searchParams)
 

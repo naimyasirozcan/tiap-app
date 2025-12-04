@@ -30,7 +30,7 @@ import { ToastContext } from "./contexts/toast.context"
 import Dashboard from "./pages/Dashboard"
 import LocationDetails from "./pages/LocationDetails"
 import SKUDetails from "./pages/SKUDetails"
-
+import EditRootCause from "./pages/EditRootCause"
 
 function App() {
 
@@ -53,7 +53,7 @@ function App() {
 
       {isLoggedIn && <Sidebar />}
 
-      <div id="main-content" className={isLoggedIn ? "h-auto w-full pl-[120px] py-[20px]" : "h-auto w-full"}>
+      <div id="main-content" className={isLoggedIn ? "h-full w-full pl-[120px] py-[20px]" : "h-full w-full"}>
 
         <Routes>
           <Route path={"/login"} element={<Login />}/>
@@ -72,8 +72,9 @@ function App() {
           <Route path={"/root-causes"} element={<RouteProtection><RootCauses /></RouteProtection>} />
           <Route path={"/root-causes/:_id"} element={<RouteProtection><RootCauseDetails /></RouteProtection>} />
           <Route path={"/root-causes/create"} element={<RouteProtection><CreateRootCause /></RouteProtection>} />
+          <Route path={"/root-causes/:_id/edit"} element={<RouteProtection><EditRootCause /></RouteProtection>} />
 
-          <Route path={"/locations/:_id"} element={<RouteProtection><Orders /></RouteProtection>} />
+          <Route path={"/locations/:_id"} element={<RouteProtection><LocationDetails /></RouteProtection>} />
           <Route path={"/orders"} element={<RouteProtection><Orders /></RouteProtection>} />
           <Route path={"/orders"} element={<RouteProtection><Orders /></RouteProtection>} />
           <Route path={"/order/:_id"} element={<RouteProtection><OrderDetails /></RouteProtection>} />

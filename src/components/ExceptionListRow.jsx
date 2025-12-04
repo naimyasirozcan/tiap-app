@@ -14,7 +14,7 @@ function ExceptionListRow( { exception }) {
       <div className="h-[40px]col-span-1 flex items-center justify-start text-[11px]">{exception.sku.name.length < 12 ? exception.sku.name : `${exception.sku.name.slice(0, 12)}...`}</div>
       <div className="h-[40px]col-span-1 flex items-center justify-start text-[11px]"><Link to={`/root-causes/${exception.rootcause._id}`}>{exception.rootcause.title.length < 12 ? exception.rootcause.title : `${exception.rootcause.title.slice(0, 12)}...`}</Link></div>
       <div className="h-[40px]col-span-1 flex items-center justify-start text-[11px]">{exception.status}</div>
-      <div className="h-[40px]col-span-1 flex items-center justify-start text-[11px]">{exception.exceptionLocation === null ? "-" : exception.exceptionLocation}</div>
+      <div className="h-[40px]col-span-1 flex items-center justify-start text-[11px]">{(!exception.exceptionLocation || exception.exceptionLocation === "" ) ? "-" : exception.exceptionLocation}</div>
       <div className="h-[40px]col-span-1 flex items-center justify-start text-[11px]">{exception.errorBy === null ? "-" : exception.errorBy}</div>
 
     </div>

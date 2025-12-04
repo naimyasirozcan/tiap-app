@@ -536,7 +536,10 @@ function EditException() {
 
                     <form onSubmit={handleCreateException}>
 
-                        <h2 className="text-xl mb-4">Edit Exception</h2>
+                        <div className="flex justify-between px-1">
+                            <h2 className="text-xl mb-4">Edit Exception</h2>
+                            <h2 className="text-xl mb-4">No: {exception ? exception.no : ""} </h2>
+                        </div>
 
                         <div className="grid grid-cols-12 gap-0">
 
@@ -594,7 +597,7 @@ function EditException() {
 
                                 </div>
 
-                                
+
                                 <div className="xs:col-span-12 lg:col-span-6">
 
                                     <h6 className="mb-2">Quantity</h6>
@@ -698,7 +701,7 @@ function EditException() {
 
                                 </div>
 
-                             
+
                                 {
                                     isReplaced &&
                                     <>

@@ -449,8 +449,8 @@ function CreateExceptionLog() {
         skuPrice: sku ? sku.price : null,
         totalCost: sku ? formInput.skuQty * sku.price : 0,
         errorBy: taskCollection ? taskCollection.employee.email : "",
-        foundBy: foundBy ? foundBy.email : "",
-        handledBy: handledBy ? handledBy.email : "",
+        foundBy: foundBy ? foundBy : "",
+        handledBy: handledBy ? handledBy : "",
         status: formInput.status,
         notes: formInput.notes,
         image: imgURL ? imgURL : ""

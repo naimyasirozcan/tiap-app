@@ -36,6 +36,7 @@ function ExceptionDetails() {
     }
     
   }
+  
   // ***********************************************************************************************
   
   if (!exception) {
@@ -144,7 +145,7 @@ function ExceptionDetails() {
         </div>
 
         <div className="lg:col-span-3 md:col-span-6 xs:col-span-12 flex items-center gap-2 lg:mt-4 xs:mt-3">
-          <h5>Error by:</h5>
+          <h5>Handled by:</h5>
           <p>{exception.handledBy ? exception.handledBy.split("@")[0] : "-"}</p>
         </div>
 
@@ -194,6 +195,7 @@ function ExceptionDetails() {
         
       </div>
       }
+
     </div>
   )
 }
