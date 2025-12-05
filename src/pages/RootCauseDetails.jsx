@@ -12,10 +12,26 @@ function RootCauseDetails() {
   const [exceptions, setExceptions] = useState(null)
   const navigate = useNavigate()
   const [showDeleteConfirm, setShowDeleteConfirm] = useState()
+  const [headerDivStyle, setHeaderDivStyle] = useState()
 
   useEffect(() => {
     service.get(`/root-causes/${_id}`)
-      .then((res) => setRootCause(res.data))
+      .then((res) => {
+        setRootCause(res.data)
+
+        const headerStyle = (res.data.task === "picking" && res.data.type === "damaged") ?
+          "w-full h-full grid grid-cols-12 rounded-lg bg-yellow-100 xs:p-4 lg:p-10" :
+          (res.data.task === "picking" && res.data.type === "missing") ?
+            "w-full h-full grid grid-cols-12 rounded-lg bg-orange-100 xs:p-4 lg:p-10" :
+            (res.data.task === "packing" && res.data.type === "damaged") ?
+              "w-full h-full grid grid-cols-12 rounded-lg bg-blue-100 xs:p-4 lg:p-10" :
+              (res.data.task === "packing" && res.data.type === "missing") ?
+                "w-full h-full grid grid-cols-12 rounded-lg bg-emerald-100 xs:p-4 lg:p-10" :
+                "w-full h-full grid grid-cols-12 rounded-lg bg-zinc-100 xs:p-4 lg:p-10"
+
+        setHeaderDivStyle(headerStyle)
+
+      })
       .catch((error) => {
         console.log(error)
       })
@@ -54,10 +70,11 @@ function RootCauseDetails() {
   if (!rootCause || !exceptions) {
     return <Loading />
   }
+
   return (
     <div className="p-10 flex flex-col gap-10">
 
-      <div className="w-full h-full  grid grid-cols-12 rounded-lg bg-zinc-100 xs:p-4 lg:p-10">
+      <div className={headerDivStyle}>
 
         <div className="xs:col-span-12 lg:col-span-6  flex flex-col">
 
