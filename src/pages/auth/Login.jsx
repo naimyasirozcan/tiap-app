@@ -44,8 +44,12 @@ function Login() {
 
       createToast("success", `Welcome ${body.email}!`)
     } catch (error) {
+
         console.log(error.response.data.errorMessage)
-        createToast("danger", error.response.data.errorMessage)
+
+        if(error.response.data.errorMessage !== "" && error.response.data.errorMessage ){
+          createToast("danger", error.response.data.errorMessage)
+        }
     }
 
   }

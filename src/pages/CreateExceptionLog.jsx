@@ -415,7 +415,7 @@ function CreateExceptionLog() {
 
       }
     } catch (error) {
-      createToast("error", "error")
+      createToast("danger", error.response.data.errorMessage)
       console.log(error)
     }
   }
