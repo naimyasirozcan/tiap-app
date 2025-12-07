@@ -2,19 +2,18 @@ import { Link } from "react-router-dom"
 
 function RootCauseCard({ rootCause }) {
 
-  const getCardClass = () => {
-    if (rootCause.task === "picking" && rootCause.type === "damaged") {
-      return "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-yellow-100 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]"
-    } else if (rootCause.task === "picking" && rootCause.type === "missing") {
-      return "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-orange-100 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]"
-    } else if (rootCause.task === "packing" && rootCause.type === "damaged") {
-      return "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-blue-100 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]"
-    } else if (rootCause.task === "packing" && rootCause.type === "missing") {
-      return "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-emerald-100 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]"
-    } else {
-      return "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-slate-100 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]"
-    }
-  }
+ const getCardClass = () => {
+  return (rootCause.task === "picking" && rootCause.type === "damaged") ?
+    "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-pink-50 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]" :
+    (rootCause.task === "picking" && rootCause.type === "missing") ?
+      "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-orange-50 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]" :
+      (rootCause.task === "packing" && rootCause.type === "damaged") ?
+        "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-blue-50 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]" :
+        (rootCause.task === "packing" && rootCause.type === "missing") ?
+          "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-emerald-50 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]" :
+          "col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-2 p-5 bg-slate-50 flex flex-col justify-between rounded-lg shadow-sm hover:shadow-md transition-shadow min-h-[180px]"
+}
+
 
   return (
     <div className={getCardClass()}>
@@ -23,6 +22,8 @@ function RootCauseCard({ rootCause }) {
           {rootCause.title}
         </h2>
       </Link>
+
+      {/* <div className="bg-"></div> */}
 
       <div className="flex flex-col gap-3 text-sm">
         <div className="flex flex-col gap-1">
