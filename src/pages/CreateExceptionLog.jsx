@@ -43,8 +43,6 @@ function CreateExceptionLog() {
     notes: ""
   })
 
-  // *************************************************************************************************
-
   useEffect(() => {
     if (formInput.status === "replaced") {
       setIsReplaced(true)
@@ -52,9 +50,6 @@ function CreateExceptionLog() {
       setIsReplaced(false)
     }
   }, [formInput.status])
-
-
-  // *************************************************************************************************
 
   useEffect(() => {
     if (task) {
@@ -66,13 +61,7 @@ function CreateExceptionLog() {
     }
   }, [task])
 
-
-  // *************************************************************************************************
-
-  // *** Get Order ***
-
   useEffect(() => {
-
     if (!formInput.orderNo.trim()) {
       setOrder(null)
       return
@@ -95,15 +84,9 @@ function CreateExceptionLog() {
       .catch((error) => {
         console.log(error)
       })
-
   }, [formInput.orderNo])
 
-  // *************************************************************************************************
-
-  // *** Get SKU ***
-
   useEffect(() => {
-
     if (!formInput.skuNo.trim()) {
       setSku(null)
       return
@@ -115,7 +98,6 @@ function CreateExceptionLog() {
       }
     })
       .then((res) => {
-
         if (res.data && res.data.length > 0) {
           setSku(res.data[0])
           console.log("sku: ", res.data[0].name)
@@ -123,21 +105,13 @@ function CreateExceptionLog() {
           setSku(null)
           console.log("SKU not found.")
         }
-
       })
       .catch((error) => {
         console.log(error)
       })
-
-
   }, [formInput.skuNo])
 
-  // *************************************************************************************************
-
-  // *** Get Task Collections ***
-
   useEffect(() => {
-
     if (!order || !formInput.occurOn.trim()) {
       setTaskCollection(null)
       return
@@ -162,15 +136,9 @@ function CreateExceptionLog() {
         .catch((error) => {
           console.log(error)
         })
-
   }, [formInput.occurOn, order])
 
-  // *************************************************************************************************
-
-  // *** Get Task ***
-
   useEffect(() => {
-
     if (!sku || !taskCollection) {
       setTask(null)
       return
@@ -188,23 +156,15 @@ function CreateExceptionLog() {
           console.log("Tasks: ", res.data)
         } else {
           setTask(null)
-          setIsFirstStepDone(false)
           console.log('No task collection found.')
         }
       })
       .catch(((error) => {
         console.log(error)
       }))
-
   }, [taskCollection, sku])
 
-
-  // *************************************************************************************************
-
-  // *** Get Root Causes ***
-
   useEffect(() => {
-
     if (!formInput.occurOn.trim() || !formInput.exceptionType.trim()) {
       setAvailableRootCauses(null)
       return
@@ -227,15 +187,9 @@ function CreateExceptionLog() {
       .catch(((error) => {
         console.log(error)
       }))
-
   }, [formInput.occurOn, formInput.exceptionType])
 
-  // *************************************************************************************************
-
-  // *** Get Employee (Found by) ***
-
   useEffect(() => {
-
     service.get('/employees', {
       params: {
         email: formInput.foundBy
@@ -252,15 +206,9 @@ function CreateExceptionLog() {
       .catch(((error) => {
         console.log(error)
       }))
-
   }, [formInput.occurOn, formInput.exceptionType])
 
-  // *************************************************************************************************
-
-  // *** Get Employee (Handled by) ***
-
   useEffect(() => {
-
     service.get('/employees', {
       params: {
         email: formInput.handledBy
@@ -277,15 +225,9 @@ function CreateExceptionLog() {
       .catch(((error) => {
         console.log(error)
       }))
-
   }, [formInput.occurOn, formInput.exceptionType])
 
-  // *************************************************************************************************
-
-  // *** Get Exception Locations ***
-
   useEffect(() => {
-
     service.get('/locations', {
       params: {
         purpose: "exception"
@@ -302,15 +244,9 @@ function CreateExceptionLog() {
       .catch(((error) => {
         console.log(error)
       }))
-
   }, [])
 
-  // *************************************************************************************************
-
-  // *** Get Replace Locations ***
-
   useEffect(() => {
-
     if (!sku) {
       setAvailableReplacedLocations(null)
       return
@@ -332,11 +268,7 @@ function CreateExceptionLog() {
       .catch(((error) => {
         console.log(error)
       }))
-
   }, [sku])
-
-
-  // *************************************************************************************************
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -354,8 +286,6 @@ function CreateExceptionLog() {
     setFormInput(holder)
     console.log(name, ": ", value)
   }
-
-  // *************************************************************************************************
 
   const handleCancel = () => {
     const resetForm = {
@@ -377,42 +307,28 @@ function CreateExceptionLog() {
     }
 
     setFormInput(resetForm)
-
     navigate(-1)
   }
 
-  // *************************************************************************************************
-
   const handleShowConfirm = (e) => {
     e.preventDefault()
-
     setShowCancelConfirm(true)
-
   }
 
-  // *************************************************************************************************
-
   const handleImageChange = async (e) => {
-
     const imageToUpload = e.target.files[0]
 
     try {
       if (imageToUpload) {
-
         setImgFile(imageToUpload)
-
         console.log(`Image choosen, file name: ${imageToUpload.name}`)
 
         const formData = new FormData()
-
         formData.append("image", imageToUpload)
 
         const response = await service.post("/uploads", formData)
-
         console.log(response.data)
-
         setImgURL(response.data.url)
-
       }
     } catch (error) {
       createToast("danger", error.response.data.errorMessage)
@@ -420,20 +336,13 @@ function CreateExceptionLog() {
     }
   }
 
-  // *************************************************************************************************
-
   const handleCreateException = async (e) => {
-
     e.preventDefault()
-
     setIsBtnDisabled(true)
-
     setIsUploading(true)
 
     try {
-
       const newException = {
-
         receivedAs: formInput.receivedAs,
         order: order ? order._id : "",
         sku: sku ? sku._id : "",
@@ -456,296 +365,212 @@ function CreateExceptionLog() {
         status: formInput.status,
         notes: formInput.notes,
         image: imgURL ? imgURL : ""
-
       }
 
       console.log(newException)
 
       const response = await service.post('/exceptions', newException)
-
       createToast("success", response.data.message)
       navigate("/logs")
-
     } catch (error) {
-
       console.log(error.response.data.errorMessage)
       createToast("danger", error.response.data.errorMessage)
-
     } finally {
       setIsBtnDisabled(false)
       setIsUploading(false)
     }
-
   }
 
-  // *************************************************************************************************
-
-
   return (
-    <div className="flex items-start justify-center h-[100vh] px-10 pt-10 pb-40">
+    <div className="h-full flex flex-col px-8">
 
-      <div className="rounded-[36px] w-full bg-[#F6F6F6] p-8">
+      <div className="sticky top-0 bg-white/95 backdrop-blur-sm z-10 py-4 border-b border-gray-200 -mx-8 px-8">
+        <h1 className="text-2xl font-bold text-gray-900">Create New Exception</h1>
+        <p className="text-sm text-gray-600 mt-1">Fill in the details to create a new exception log</p>
+      </div>
 
-        <div>
-
+      <div className="flex-1 overflow-y-auto py-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-300 p-6">
           <form onSubmit={handleCreateException}>
+            <div className="grid grid-cols-12 gap-6">
 
-            <h2 className="text-xl mb-4">New Exception</h2>
+              <div className="col-span-12 lg:col-span-8 grid grid-cols-12 gap-4">
 
-            <div className="grid grid-cols-12 gap-">
-
-              <div className="xs:col-span-12 lg:col-span-8 grid grid-cols-12 gap-4">
-
-                <div className="xs:col-span-12 lg:col-span-6">
-
-                  <h6 className="mb-2">Received As</h6>
-
-                  <select type="text" name="receivedAs" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                    <option value="" className="text-gray-500">received as</option>
+                <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                  <label className="text-xs font-semibold text-gray-700">Received As</label>
+                  <select name="receivedAs" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    <option value="">received as</option>
                     <option value="operation error">Operation Error</option>
                     <option value="costumer complaint">Costumer Complaint</option>
                   </select>
-
                 </div>
 
-                <div className="xs:col-span-12 lg:col-span-6">
-
-                  <h6 className="mb-2">Occured On</h6>
-
-                  <select type="text" name="occurOn" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                    <option value="" className="text-gray-500">occurred on...</option>
+                <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                  <label className="text-xs font-semibold text-gray-700">Occured On</label>
+                  <select name="occurOn" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    <option value="">occurred on...</option>
                     <option value="picking">Picking</option>
                     <option value="packing">Packing</option>
                   </select>
-
                 </div>
 
-                <div className="xs:col-span-12 lg:col-span-6">
-
-                  <h6 className="mb-2">Order No</h6>
-
-                  <input required type="text" value={formInput.orderNo} name="orderNo" placeholder="Example: WON20230125000001E" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                  <label className="text-xs font-semibold text-gray-700">Order No</label>
+                  <input required type="text" value={formInput.orderNo} name="orderNo" placeholder="Example: WON20230125000001E" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400" />
                 </div>
 
-                <div className="xs:col-span-12 lg:col-span-6">
-
-                  <h6 className="mb-2">SKU No</h6>
-
-                  <input required type="text" value={formInput.skuNo} name="skuNo" placeholder="Example: 156210" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                  <label className="text-xs font-semibold text-gray-700">SKU No</label>
+                  <input required type="text" value={formInput.skuNo} name="skuNo" placeholder="Example: 156210" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400" />
                 </div>
 
-                <div className="xs:col-span-12 lg:col-span-6">
-
-                  <h6 className="mb-2">Exception Type</h6>
-
-                  <select required type="text" name="exceptionType" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                    <option value="" className="text-gray-500">exception type...</option>
+                <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                  <label className="text-xs font-semibold text-gray-700">Exception Type</label>
+                  <select required name="exceptionType" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    <option value="">exception type...</option>
                     <option value="damaged">Damaged</option>
                     <option value="missing">Missing</option>
                   </select>
-
                 </div>
 
-                {
-                  task &&
+                {task && (
                   <>
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Quantity</h6>
-
-                      <input required type="number" min={0} max={maxQty} value={formInput.skuQty} name="skuQty" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Quantity</label>
+                      <input required type="number" min={0} max={maxQty} value={formInput.skuQty} name="skuQty" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400" />
                     </div>
 
-
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Zone</h6>
-
-                      <input type="text" disabled={true} value={taskCollection ? taskCollection.zone : ""} name="zone" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Zone</label>
+                      <input type="text" disabled={true} value={taskCollection ? taskCollection.zone : ""} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Location</h6>
-
-                      <input type="text" disabled={true} value={task.location.name} name="location" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Location</label>
+                      <input type="text" disabled={true} value={task.location.name} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Root Cause</h6>
-
-                      <select required type="text" name="rootCause" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                        <option value="" className="text-gray-500">select route cause......</option>
-                        {availableRootCauses &&
-
-                          availableRootCauses.map((eachRootCause, index) => {
-                            return <option key={index} value={eachRootCause.title}>{eachRootCause.title}</option>
-                          })
-                        }
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Root Cause</label>
+                      <select required name="rootCause" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <option value="">select route cause......</option>
+                        {availableRootCauses && availableRootCauses.map((eachRootCause, index) => {
+                          return <option key={index} value={eachRootCause.title}>{eachRootCause.title}</option>
+                        })}
                       </select>
-
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Department</h6>
-
-                      <input type="text" disabled={true} value={taskCollection ? taskCollection.employee.department : ""} name="location" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Department</label>
+                      <input type="text" disabled={true} value={taskCollection ? taskCollection.employee.department : ""} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">SKU Price - €</h6>
-
-                      <input type="text" disabled={true} value={sku ? sku.price : 0} name="skuPrice" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">SKU Price - €</label>
+                      <input type="text" disabled={true} value={sku ? sku.price : 0} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Total Cost - €</h6>
-
-                      <input type="text" disabled={true} value={sku ? sku.price * formInput.skuQty : 0} name="totalCost" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Total Cost - €</label>
+                      <input type="text" disabled={true} value={sku ? sku.price * formInput.skuQty : 0} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Found by</h6>
-
-                      <input required type="email" placeholder="example: adam.johnson01@company.com" value={formInput.foundBy} name="foundBy" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Found by</label>
+                      <input required type="email" placeholder="example: adam.johnson01@company.com" value={formInput.foundBy} name="foundBy" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Handled by</h6>
-
-                      <input required type="email" placeholder="example: adam.johnson01@company.com" value={formInput.handledBy} name="handledBy" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Handled by</label>
+                      <input required type="email" placeholder="example: adam.johnson01@company.com" value={formInput.handledBy} name="handledBy" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Error by</h6>
-
-                      <input required type="text" disabled={true} value={taskCollection ? taskCollection.employee.email : ""} name="errorBy" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" />
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Error by</label>
+                      <input required type="text" disabled={true} value={taskCollection ? taskCollection.employee.email : ""} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3" />
                     </div>
 
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Status</h6>
-
-                      <select required type="text" name="status" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                        <option value="" className="text-gray-500">status</option>
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Status</label>
+                      <select required name="status" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <option value="">status</option>
                         <option value="handled">Handled</option>
                         <option value="replaced">Replaced</option>
                         <option value="irrecoverable">Irrecoverable</option>
                         <option value="backlog">Backlog</option>
                       </select>
-
                     </div>
-
                   </>
-                }
-                {
-                  isReplaced &&
+                )}
+
+                {isReplaced && (
                   <>
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Replaced Cell</h6>
-
-                      <select type="text" name="replacedFrom" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                        <option value="" className="text-gray-500">select replace location......</option>
-                        {availableReplacedLocations &&
-
-                          availableReplacedLocations.map((eachLocation, index) => {
-                            return <option key={index} value={eachLocation.name}>{eachLocation.name}</option>
-                          })
-                        }
-
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Replaced Cell</label>
+                      <select name="replacedFrom" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <option value="">select replace location......</option>
+                        {availableReplacedLocations && availableReplacedLocations.map((eachLocation, index) => {
+                          return <option key={index} value={eachLocation.name}>{eachLocation.name}</option>
+                        })}
                       </select>
-
                     </div>
-                    <div className="xs:col-span-12 lg:col-span-6">
-
-                      <h6 className="mb-2">Exception Cell</h6>
-
-                      <select type="text" name="fakeLocation" onChange={handleChange} className="col-span-1 w-full h-9 mb-3 text-[11px] bg-[#E0E0E0] rounded-lg px-3" >
-                        <option value="" className="text-gray-500">select fake location......</option>
-                        {availableExceptionLocations &&
-
-                          availableExceptionLocations.map((eachLocation, index) => {
-                            return <option key={index} value={eachLocation.name}>{eachLocation.name}</option>
-                          })
-                        }
+                    <div className="col-span-12 lg:col-span-6 flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Exception Cell</label>
+                      <select name="fakeLocation" onChange={handleChange} className="w-full h-9 text-xs bg-[#E0E0E0] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <option value="">select fake location......</option>
+                        {availableExceptionLocations && availableExceptionLocations.map((eachLocation, index) => {
+                          return <option key={index} value={eachLocation.name}>{eachLocation.name}</option>
+                        })}
                       </select>
-
                     </div>
                   </>
-                }
+                )}
 
               </div>
 
-              <div className="xs:col-span-12 lg:col-span-4 p-3">
+              <div className="col-span-12 lg:col-span-4 flex flex-col gap-4">
+                {imgFile && (
+                  <div className="w-full flex justify-center">
+                    <img src={imgURL} alt="exception image" className="max-h-[300px] max-w-full object-contain rounded-lg border border-gray-300 shadow-sm" />
+                  </div>
+                )}
 
-
-                {imgFile && <div className="w-full h-auto flex items-center justify-center rounded-lg">
-                  <img src={imgURL ? imgURL : ""} alt="exception image" className="max-h-[40%] rounded-lg " />
-                </div>}
-                {task &&
+                {task && (
                   <>
-                    <h6 className="mb-2">Image</h6>
-
-                    <div className="mt-5">
-                      <input required type="file" accept="image/*" placeholder="Choose an image" onChange={handleImageChange} className="flex cursor-pointer items-center w-full h-9 mb-3 text-[11px] p-2 bg-[#E0E0E0] rounded-lg px-3" />
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Image</label>
+                      <input required type="file" accept="image/*" placeholder="Choose an image" onChange={handleImageChange} className="w-full h-9 text-xs p-2 bg-[#E0E0E0] rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-400" />
                     </div>
 
-                    <div className="mt-5">
-                      <input type="text" placeholder="Notes..." name="notes" onChange={handleChange} className="flex cursor-pointer items-center w-full h-9 mb-3 text-[11px] p-2 bg-[#E0E0E0] rounded-lg px-3" />
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs font-semibold text-gray-700">Notes</label>
+                      <textarea placeholder="Notes..." name="notes" onChange={handleChange} rows={4} className="w-full text-xs p-2 bg-[#E0E0E0] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-400" />
                     </div>
-
                   </>
-                }
-
+                )}
               </div>
 
             </div>
 
-            <div className="flex gap-2 justify-end mt-3">
-              <button onClick={handleShowConfirm} className="bg-red-400 px-3 py-1 rounded-lg">Cancel</button>
-              <button disabled={isBtnDisabled} type="submit" className=" bg-zinc-500 px-3 py-1 rounded-lg">Submit</button>
+            <div className="flex gap-3 justify-end mt-6 pt-6 border-t border-gray-200">
+              <button type="button" onClick={handleShowConfirm} className="bg-red-400 hover:bg-red-500 text-white px-6 py-2 rounded-lg transition-colors font-medium text-sm">Cancel</button>
+              <button disabled={isBtnDisabled} type="submit" className="bg-zinc-300 hover:bg-zinc-400 px-6 py-2 rounded-lg transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
             </div>
-
-
-
           </form>
         </div>
       </div>
 
-      {
-        showCancelConfirm &&
-        <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div class="p-6 rounded-xl bg-white">
-            <p className="w-full mb-4">Are you sure to cancel?</p>
-            <div className="flex items-center justify-between">
-              <button onClick={() => {
-                setShowCancelConfirm(false)
-              }} className=" bg-zinc-500 px-3 py-1 rounded-lg">Go Back</button>
-              <button onClick={handleCancel} className="bg-red-400 px-3 py-1 rounded-lg">Yes</button>
+      {showCancelConfirm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="p-8 rounded-xl bg-white shadow-2xl max-w-md w-full mx-4">
+            <p className="text-lg font-semibold mb-6">Are you sure you want to cancel?</p>
+            <div className="flex items-center justify-end gap-4">
+              <button onClick={() => setShowCancelConfirm(false)} className="bg-zinc-200 hover:bg-zinc-300 px-6 py-2 rounded-lg transition-colors font-medium text-sm">Go Back</button>
+              <button onClick={handleCancel} className="bg-red-400 hover:bg-red-500 text-white px-6 py-2 rounded-lg transition-colors font-medium text-sm">Yes</button>
             </div>
           </div>
-
         </div>
-      }
+      )}
 
     </div>
   )
