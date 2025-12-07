@@ -9,8 +9,8 @@ function NotFound() {
         <p className="text-[px] text-zinc-900 font-normal mb-4">Please check your address bar to be sure you’re trying to access an existing page.</p>
         <span className="text-[11px]">You may want to move:</span>
         <div className="flex gap-4 items-center">
-          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/logs"} className="no-underline">Logs</Link></button>
-          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/dashboard"} className="no-underline">Dashboard</Link></button>
+          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/logs"} className="underline">Logs</Link></button>
+          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/dashboard"} className="underline">Dashboard</Link></button>
         </div>
 
 
