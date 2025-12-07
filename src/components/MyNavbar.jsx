@@ -10,42 +10,29 @@ function MyNavbar() {
   const location = useLocation()
 
   const handleLogout = async () => {
-
     localStorage.removeItem("authToken")
     localStorage.removeItem("loggerUserInfo")
     await authenticateUser()
     navigate("/login")
     console.log(`Employee logged out from TIAP succesfully.`)
-
   }
 
   return (
+    <div className="flex flex-row items-center justify-between px-3 h-[24px] w-full bg-[#403f3f] fixed top-0 left-0 z-40">
+      <img style={{ height: "18px" }} src={LightLogo} alt="" />
 
-    <div
-      className="bottom-shadow flex flex-row items-center justify-between pl-3 h-[20px] w-full bg-[#403f3f] fixed top-0 left-0 z-40">
-      <img style={{ height: "20px" }} src={LightLogo} alt="" />
-
-      <ul style={
-        {
-          listStyle: "none",
-          marginBottom: 0,
-          color: "#fff"
-        }
-      }
-        className="flex items-center gap-3 pr-2 poppins-light cursor-pointer">
-        {isLoggedIn ?
+      <ul className="flex items-center gap-3 poppins-light cursor-pointer text-white text-sm list-none m-0">
+        {isLoggedIn ? (
           <>
             <li><Link to={"/profile"}>Profile</Link></li>
-            <li> <a onClick={handleLogout}> Log Out </a></li>
-          </> :
-          location.pathname === "/signup" ?
-            <li><Link to={"/login"}>Login</Link></li> :
-            location.pathname === "/login" ?
-              <li><Link to={"/signup"}>Signup</Link></li> :
-              null
-        }
+            <li><a onClick={handleLogout}>Log Out</a></li>
+          </>
+        ) : location.pathname === "/signup" ? (
+          <li><Link to={"/login"}>Login</Link></li>
+        ) : location.pathname === "/login" ? (
+          <li><Link to={"/signup"}>Signup</Link></li>
+        ) : null}
       </ul>
-
     </div>
   )
 }

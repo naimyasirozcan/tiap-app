@@ -7,7 +7,7 @@ function MyToast({ type, message }) {
 
     return (
         <>
-            {type === "success" ? <div id="toast-success" className="flex items-center w-full max-w-sm p-4 text-body bg-green-400 rounded-base shadow-xs border border-default" role="alert">
+            {type === "success" ? <div id="toast-success" className="flex items-center w-full max-w-sm p-4 text-body bg-green-400 rounded-base border border-default" role="alert">
 
                 <div className="inline-flex items-center justify-center shrink-0 w-7 h-7 text-fg-success bg-success-soft rounded">
                     <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -29,7 +29,7 @@ function MyToast({ type, message }) {
 
                 : type === "danger" ?
 
-                    <div id="toast-danger" className="flex items-center w-full max-w-sm p-4 text-body bg-red-400 rounded-base shadow-xs border border-default" role="alert">
+                    <div id="toast-danger" className="flex items-center w-full max-w-sm p-4 text-body bg-red-400 rounded-base border border-default" role="alert">
 
                         <div className="inline-flex items-center justify-center shrink-0 w-7 h-7 text-fg-danger bg-danger-soft rounded">
                             <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -54,7 +54,7 @@ function MyToast({ type, message }) {
 
                     : type === "warning" ?
 
-                        <div id="toast-warning" className="flex items-center w-full max-w-sm p-4 text-body  bg-yellow-400 rounded-base shadow-xs border border-default" role="alert">
+                        <div id="toast-warning" className="flex items-center w-full max-w-sm p-4 text-body  bg-yellow-400 rounded-base border border-default" role="alert">
 
                             <div className="inline-flex items-center justify-center shrink-0 w-7 h-7 text-fg-warning bg-warning-soft rounded">
 

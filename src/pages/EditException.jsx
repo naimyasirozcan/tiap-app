@@ -530,7 +530,7 @@ function EditException() {
     return (
         <div className="px-10 pt-3">
 
-            <div className="rounded-[36px] min-w-[350px] bg-[#F6F6F6] bottom-shadow p-8">
+            <div className="rounded-[36px] min-w-[350px] bg-[#F6F6F6] p-8">
 
                 <div>
 
@@ -774,7 +774,7 @@ function EditException() {
             {
                 showCancelConfirm &&
                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                    <div className="p-6 rounded-xl shadow-lg bg-white">
+                    <div className="p-6 rounded-xl bg-white">
                         <p className="w-full mb-4">Are you sure to cancel?</p>
                         <div className="flex items-center justify-between">
                             <button onClick={() => {

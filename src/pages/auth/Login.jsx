@@ -80,14 +80,14 @@ function Login() {
 
           <div className="max-w-screen-xl flex flex-col">
             <label htmlFor="sign-up-btn" className="text-xs mb-1">Don't have an account?</label>
-            <button id="sign-up-btn" className="bottom-shadow rounded-lg h-9 w-full" ><Link to={"/signup"} className="no-underline">Sign Up</Link></button>
+            <button id="sign-up-btn" className="rounded-lg h-9 w-full text-start" ><Link to={"/signup"} className="underline">Sign Up</Link></button>
           </div>
 
         </div>
 
         <div className="xs:col-span-12 md:col-span-6 sm:col-span-12 flex flex-col justify-center items-center ">
 
-          <div className="h-[500px] w-[350px] rounded-[36px] bg-[#F6F6F6] bottom-shadow p-8">
+          <div className="h-[500px] w-[350px] rounded-[36px] bg-[#F6F6F6] p-8">
 
             <div className="w-full flex items-center justify-center">
               <img src={logoIcon} alt="" />
@@ -103,6 +103,7 @@ function Login() {
                 <input type="password" name="password" placeholder="password here..." onChange={handleChange} className="w-full h-9 bg-[#E0E0E0] rounded-lg p-3" />
                 <button type="submit" className="mt-3 bg-zinc-400 px-3 py-1 rounded-lg">Login</button>
               </form>
+
             </div>
           </div>
 

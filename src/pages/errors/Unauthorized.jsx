@@ -10,10 +10,10 @@ function Unauthorized() {
         <p className="text-[px] text-zinc-900 font-normal mb-4">Please be sure you are logged in. If you are logged in and can’t see the page, please talk with your supervisor to get access.</p>
         <span className="text-[11px]">You may want to move:</span>
         <div className="flex gap-4 items-center">
-          <button id="sign-up-btn" className="bottom-shadow rounded-lg h-9 w-[120px]" ><Link to={"/signup"} className="no-underline">Sign Up</Link></button>
-          <button id="sign-up-btn" className="bottom-shadow rounded-lg h-9 w-[120px]" ><Link to={"/login"} className="no-underline">Login</Link></button>
-          <button id="sign-up-btn" className="bottom-shadow rounded-lg h-9 w-[120px]" ><Link to={"/logs"} className="no-underline">Logs</Link></button>
-          <button id="sign-up-btn" className="bottom-shadow rounded-lg h-9 w-[120px]" ><Link to={"/dashboard"} className="no-underline">Dashboard</Link></button>
+          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/signup"} className="no-underline">Sign Up</Link></button>
+          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/login"} className="no-underline">Login</Link></button>
+          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/logs"} className="no-underline">Logs</Link></button>
+          <button id="sign-up-btn" className="rounded-lg h-9 w-[120px]" ><Link to={"/dashboard"} className="no-underline">Dashboard</Link></button>
         </div>
 
 

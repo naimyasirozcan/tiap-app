@@ -99,14 +99,14 @@ function Signup() {
 
           <div className="max-w-screen-xl flex flex-col">
             <label htmlFor="sign-up-btn" className="text-xs mb-1">Already have an account?</label>
-            <button id="sign-up-btn" className="bottom-shadow rounded-lg h-9 w-full" ><Link to={"/login"} className="no-underline">Login</Link></button>
+            <button id="sign-up-btn" className="rounded-lg h-9 w-full" ><Link to={"/login"} className="no-underline">Login</Link></button>
           </div>
 
         </div>
 
         <div className="xs:col-span-12 md:col-span-6 sm:col-span-12 flex flex-col justify-center items-center ">
 
-          <div className="rounded-[36px] min-w-[350px] bg-[#F6F6F6] bottom-shadow p-8">
+          <div className="rounded-[36px] min-w-[350px] bg-[#F6F6F6] p-8">
 
             <div>
 

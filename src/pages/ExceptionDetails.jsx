@@ -47,7 +47,7 @@ function ExceptionDetails() {
     <div className="px-12 pt-4">
 
       <h1 className="text-[24px] font-black mb-5">Exception Log</h1>
-      <div className="grid grid-cols-12 p-5 bg-zinc-200 rounded-lg">
+      <div className="grid grid-cols-12 p-5 bg-white rounded-lg">
 
         <div className="lg:col-span-3 md:col-span-6 xs:col-span-12 flex items-center gap-2">
           <h5>No:</h5>
@@ -183,7 +183,7 @@ function ExceptionDetails() {
       {
         showDeleteConfirm &&
         <div class="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-        <div class="p-6 rounded-xl shadow-lg bg-white">
+        <div class="p-6 rounded-xl bg-white">
           <p className="w-full mb-4">Are you sure to delete?</p>
           <div className="flex items-center justify-between">
               <button onClick={() => {

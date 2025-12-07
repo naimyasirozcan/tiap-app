@@ -139,31 +139,31 @@ function Dashboard() {
   const rootCauseData = getTopRootCauses()
 
   return (
-    <div className="p-6 min-h-screen">
-      <h1 className="text-xl font-bold mb-6">Exception Analytics - Last 30 Days</h1>
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-6">Exception Analytics - Last 30 Days</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-zinc-100 cursor-pointer p-4 rounded-lg shadow">
-          <h3 className="text-sm text-gray-600">Total Exceptions</h3>
-          <p className="text-lg font-bold">{lastMonthData.length}</p>
+        <div className="bg-zinc-100 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h3 className="text-sm font-semibold text-gray-600 mb-2">Total Exceptions</h3>
+          <p className="text-2xl font-bold">{lastMonthData.length}</p>
         </div>
-        <div className="bg-zinc-100 cursor-pointer p-4 rounded-lg shadow">
-          <h3 className="text-sm text-gray-600">Total Cost</h3>
-          <p className="text-lg font-bold">
+        <div className="bg-zinc-100 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h3 className="text-sm font-semibold text-gray-600 mb-2">Total Cost</h3>
+          <p className="text-2xl font-bold">
             ${lastMonthData.reduce((sum, exc) => sum + (exc.totalCost || 0), 0).toFixed(2)}
           </p>
         </div>
-        <div className="bg-zinc-100 cursor-pointer p-4 rounded-lg shadow">
-          <h3 className="text-sm text-gray-600">Avg Cost per Exception</h3>
-          <p className="text-lg font-bold">
+        <div className="bg-zinc-100 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h3 className="text-sm font-semibold text-gray-600 mb-2">Avg Cost per Exception</h3>
+          <p className="text-2xl font-bold">
             ${lastMonthData.length > 0
               ? (lastMonthData.reduce((sum, exc) => sum + (exc.totalCost || 0), 0) / lastMonthData.length).toFixed(2)
               : '0.00'}
           </p>
         </div>
-        <div className="bg-zinc-100 cursor-pointer p-4 rounded-lg shadow">
-          <h3 className="text-sm text-gray-600">Most Common Type</h3>
-          <p className="text-lg font-bold capitalize">
+        <div className="bg-zinc-100 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <h3 className="text-sm font-semibold text-gray-600 mb-2">Most Common Type</h3>
+          <p className="text-2xl font-bold capitalize">
             {costByType.length > 0
               ? costByType.sort((a, b) => b.count - a.count)[0]?.type
               : 'N/A'}
@@ -172,14 +172,14 @@ function Dashboard() {
       </div>
 
       {lastMonthData.length === 0 ? (
-        <div className="bg-zinc-100 cursor-pointer p-8 rounded-lg shadow text-center">
+        <div className="bg-zinc-100 p-8 rounded-lg text-center shadow-sm">
           <p className="text-gray-500 text-lg">No exceptions found in the last 30 days</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <div className="bg-zinc-100 cursor-pointer p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Total Cost by Exception Type</h2>
+          <div className="bg-zinc-100 p-6 rounded-lg shadow-sm">
+            <h2 className="text-lg font-semibold mb-4">Total Cost by Exception Type</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={costByType}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -194,8 +194,8 @@ function Dashboard() {
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-zinc-100 cursor-pointer p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Exception Status Distribution</h2>
+          <div className="bg-zinc-100 p-6 rounded-lg shadow-sm">
+            <h2 className="text-lg font-semibold mb-4">Exception Status Distribution</h2>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -216,8 +216,8 @@ function Dashboard() {
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-zinc-100 cursor-pointer p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Exceptions by Task Type</h2>
+          <div className="bg-zinc-100 p-6 rounded-lg shadow-sm">
+            <h2 className="text-lg font-semibold mb-4">Exceptions by Task Type</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={taskTypeData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -232,8 +232,8 @@ function Dashboard() {
             </ResponsiveContainer>
           </div>
 
-          <div className="bg-zinc-100 cursor-pointer p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Top 5 Root Causes by Cost (Click to view details)</h2>
+          <div className="bg-zinc-100 p-6 rounded-lg shadow-sm">
+            <h2 className="text-lg font-semibold mb-4">Top 5 Root Causes by Cost (Click to view details)</h2>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={rootCauseData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" />

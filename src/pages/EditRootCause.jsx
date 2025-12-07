@@ -67,7 +67,7 @@ function EditRootCause() {
 
                 <div className="xs:col-span-12 flex flex-col justify-center items-center ">
 
-                    <div className="h-[500px] w-[350px] rounded-[36px] bg-[#F6F6F6] bottom-shadow p-8">
+                    <div className="h-[500px] w-[350px] rounded-[36px] bg-[#F6F6F6] p-8">
 
                         <div>
 
