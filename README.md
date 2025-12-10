@@ -7,7 +7,7 @@
 
 ## **Description**
 
-TIAP App is a modern and responsive React frontend application built for the **Tracking, Inspection, and Analysis Platform (TIAP)**.  
+TIAP App is a modern React application built for the **Tracking, Inspection, and Analysis Platform (TIAP)**.  
 It provides tools for warehouse exception logging, root cause tracking, and operational analytics through interactive dashboards.
 
 Key functionalities include exception management, monthly statistics, root cause analysis, image upload, and role-based access control.
