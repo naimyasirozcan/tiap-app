@@ -28,8 +28,6 @@ function RootCauses() {
 
     searchParams.set(name, value)
     setSearchParams(searchParams)
-
-    console.log(name, value)
   }
 
   if (!rootCauses) {

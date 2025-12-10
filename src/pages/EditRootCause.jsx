@@ -31,7 +31,6 @@ function EditRootCause() {
 
         try {
             const response = await service.put(`/root-causes/${_id}`, rootcause)
-            console.log(response)
             createToast("success", response.data.message)
             setRootcause({
                 task: "",

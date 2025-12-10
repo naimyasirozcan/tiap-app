@@ -11,8 +11,6 @@ function ExceptionListFiltersBar({ searchParams, setSearchParams }) {
 
     searchParams.set(name, value)
     setSearchParams(searchParams)
-
-    console.log(name, value)
   }
 
   return (

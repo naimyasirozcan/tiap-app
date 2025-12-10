@@ -23,7 +23,6 @@ function ExceptionDetails() {
   const handleDelete = async () => {
     try {
       const response = await service.delete(`/exceptions/${exception._id}`)
-      console.log(response.data)
       navigate("/logs")
       createToast("success", response.data.message)
     } catch (error) {

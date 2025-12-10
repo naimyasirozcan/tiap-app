@@ -107,7 +107,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setOrder(res.data[0])
-                    console.log("order: ", res.data[0]._id)
                 } else {
                     setOrder(null)
                     console.log("Order not found.")
@@ -158,7 +157,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setTaskCollection(res.data[0])
-                    console.log("Task Collection: ", res.data[0])
                 } else {
                     setTaskCollection(null)
                     console.log("Task collection not found.")
@@ -184,7 +182,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setTask(res.data[0])
-                    console.log("Tasks: ", res.data)
                 } else {
                     setTask(null)
                     console.log('No task collection found.')
@@ -210,7 +207,7 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setAvailableRootCauses(res.data)
-                    console.log("Root causes: ", res.data)
+
                 } else {
                     console.log("Rootcause not found.")
                 }
@@ -234,7 +231,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setFoundBy(res.data[0])
-                    console.log("Employee (found by): ", res.data[0])
                 } else {
                     setFoundBy(null)
                     console.log("Employee not found.")
@@ -259,7 +255,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setHandledBy(res.data[0])
-                    console.log("Employee (handled by): ", res.data[0])
                 } else {
                     setHandledBy(null)
                     console.log("Employee not found.")
@@ -279,7 +274,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setAvailableExceptionLocations(res.data)
-                    console.log("Available exception locations: ", res.data)
                 } else {
                     console.log("No available location found.")
                 }
@@ -303,7 +297,6 @@ function EditException() {
             .then((res) => {
                 if (res.data && res.data.length > 0) {
                     setAvailableReplacedLocations(res.data)
-                    console.log("Available replace locations: ", res.data)
                 } else {
                     console.log("No available replace location found.")
                 }
@@ -327,7 +320,6 @@ function EditException() {
         }
 
         setFormInput(holder)
-        console.log(name, ": ", value)
     }
 
     const handleCancel = () => {
@@ -364,13 +356,12 @@ function EditException() {
         try {
             if (imageToUpload) {
                 setImgFile(imageToUpload)
-                console.log(`Image choosen, file name: ${imageToUpload.name}`)
 
                 const formData = new FormData()
                 formData.append("image", imageToUpload)
 
                 const response = await service.post("/uploads", formData)
-                console.log(response.data)
+ 
                 setImgURL(response.data.url)
             }
         } catch (error) {

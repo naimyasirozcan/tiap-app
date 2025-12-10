@@ -5,14 +5,12 @@ import Loading from './Loading'
 function Profile() {
   const userInfoJSON = localStorage.getItem("loggedUserInfo")
   const userInfoParsed = JSON.parse(userInfoJSON)
-  console.log(userInfoJSON)
   const [userInfo, setUserInfo] = useState(null) 
 
   useEffect(() => {
     service.get(`employees/${userInfoParsed._id}`)
     .then((res) => {
       setUserInfo(res.data)
-      console.log("Employee: ", res.data)
     })
     .catch((error) => {
       console.log(error)

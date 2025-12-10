@@ -18,7 +18,6 @@ function CreateRootCause() {
 
     try {
       const response = await service.post("/root-causes", newRootCause)
-      console.log(response)
       createToast("success", response.data.message)
       setNewRootCause({
         task: "",
@@ -41,8 +40,6 @@ function CreateRootCause() {
     newRootCause[name] = value
 
     setNewRootCause(newRootCause)
-    console.log(name, ": ", value)
-    console.log(newRootCause[name])
   }
 
 

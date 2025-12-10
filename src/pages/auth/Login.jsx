@@ -40,8 +40,6 @@ function Login() {
       
       navigate("/logs")
 
-      console.log(`Welcome ${body.email}!`)
-
       createToast("success", `Welcome ${body.email}!`)
     } catch (error) {
 
