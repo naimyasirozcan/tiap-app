@@ -16,7 +16,7 @@ function ToastWrapper({ children }) {
         
         const newToast = {
             type: type,
-            message, message
+            message: message
         }
 
         const clone = [...toasts]
